@@ -9,7 +9,6 @@ if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
-
 $name = $email = $password_hash = $cep = "";
 $erro = "";
 
@@ -17,16 +16,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password_hash = $_POST['password_hash'];
-    $cep = $_POST['cep']; 
+    $cep = $_POST['cep'];
+
     if (empty($name) || empty($email) || empty($password_hash) || empty($cep)) {
         $erro = "Todos os campos são obrigatórios!";
     } else {
-        $sql = "INSERT INTO Clients (name, email, password_hash, cep) VALUES ('$name', '$email', '$password_hash', '$cep')";
 
-        if ($conn->query($sql) === TRUE) {
-            $sucesso = "Novo registro criado com sucesso!";
+        $cep = preg_replace('/[^0-9]/', '', $cep);
+        $viacep_url = "https://viacep.com.br/ws/$cep/json/";
+
+        $viacep_response = file_get_contents($viacep_url);
+        $viacep_data = json_decode($viacep_response, true);
+
+        if (isset($viacep_data['erro']) && $viacep_data['erro'] === true) {
+            $erro = "O CEP informado é inválido!";
         } else {
-            $erro = "Erro: " . $conn->error;
+
+            $sql = "INSERT INTO Clients (name, email, password_hash, cep) VALUES ('$name', '$email', '$password_hash', '$cep')";
+            if ($conn->query($sql) === TRUE) {
+                $sucesso = "Novo registro criado com sucesso!";
+            } else {
+                $erro = "Erro ao salvar no banco de dados: " . $conn->error;
+            }
         }
     }
 }
@@ -37,13 +48,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Usuário</title>
-    <link rel="stylesheet" href="styles.css"> 
+    <title>Registro</title>
+    <link rel="stylesheet" href="styles.css?version=1.0">
 </head>
 <body>
     <div class="container">
-        <h1>Registrar Novo Usuário</h1>
-
+        <h1>Registro</h1>
         <?php if (!empty($erro)): ?>
             <div class="error"><?php echo $erro; ?></div>
         <?php elseif (!empty($sucesso)): ?>
@@ -65,12 +75,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <button type="submit">Registrar</button>
         </form>
-
+        <div class="back-to-register">
+            <a href="/pages/login">Ir para o Login</a>
+        </div>
     </div>
 
-    <?php
-    $conn->close();
-    ?>
+    <?php $conn->close(); ?>
 
 </body>
 </html>

@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container">
-        <h1>Login de Usuário</h1>
+        <h1>Login</h1>
 
         <?php if (!empty($erro)): ?>
             <div class="error"><?php echo $erro; ?></div>
@@ -62,6 +62,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <button type="submit">Entrar</button>
         </form>
+        <div class="back-to-register">
+            <a href="/pages/register">Ir para o Registro</a>
+        </div>
     </div>
 
     <script>

@@ -23,5 +23,8 @@ for (let i = 0; i < buttons.length; i++) {
         }
 
         localStorage.setItem('cart', JSON.stringify(cart));
+
+
     });
 }
+

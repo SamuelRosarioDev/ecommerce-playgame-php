@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Tempo de geração: 22/11/2024 às 23:52
+-- Host: 127.0.0.1
+-- Tempo de geração: 24/11/2024 às 17:04
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -18,16 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `EcommercePlayGame`
+-- Banco de dados: `ecommerceplaygame`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `Clients`
+-- Estrutura para tabela `clients`
 --
 
-CREATE TABLE `Clients` (
+CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -37,37 +37,54 @@ CREATE TABLE `Clients` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `Clients`
+-- Despejando dados para a tabela `clients`
 --
 
-INSERT INTO `Clients` (`id`, `name`, `email`, `password_hash`, `cep`, `isAdmin`) VALUES
+INSERT INTO `clients` (`id`, `name`, `email`, `password_hash`, `cep`, `isAdmin`) VALUES
 (1, 'Samuel', 'samuel@gmail.com', '123', '66812420', 0),
-(4, 'Samuel', 'samuel2@gmail.com', '123', '66812420', 0);
+(4, 'Samuel', 'samuel2@gmail.com', '123', '66812420', 0),
+(5, 'Luis', 'luis@gmail.com', '123', '66055420', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `ORDERS`
+-- Estrutura para tabela `orders`
 --
 
-CREATE TABLE `ORDERS` (
+CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `id_client` int(11) DEFAULT NULL,
   `id_product` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
   `TOTAL` decimal(10,2) NOT NULL,
-  `payment_method` varchar(50) NOT NULL
+  `payment_method` varchar(50) NOT NULL,
+  `cep` varchar(10) NOT NULL,
+  `frete` decimal(10,2) DEFAULT NULL,
+  `desconto` decimal(10,2) DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `ORDERS`
+-- Despejando dados para a tabela `orders`
 --
 
-INSERT INTO `ORDERS` (`id`, `id_client`, `id_product`, `quantity`, `TOTAL`, `payment_method`) VALUES
-(1, 1, 1, 1, 0.00, 'PIX'),
-(2, 1, 2, 2, 65.98, 'PIX'),
-(3, 1, 2, 2, 65.98, 'PIX'),
-(4, 1, 1, 1, 0.00, 'PIX');
+INSERT INTO `orders` (`id`, `id_client`, `id_product`, `quantity`, `TOTAL`, `payment_method`, `cep`, `frete`, `desconto`) VALUES
+(1, 1, 1, 1, 0.00, 'PIX', '', NULL, 0.00),
+(2, 1, 2, 2, 65.98, 'PIX', '', NULL, 0.00),
+(3, 1, 2, 2, 65.98, 'PIX', '', NULL, 0.00),
+(4, 1, 1, 1, 0.00, 'PIX', '', NULL, 0.00),
+(5, 1, 2, 1, 32.99, 'PIX', '66055420', 30.00, 0.00),
+(6, 1, 2, 2, 65.98, 'PIX', '66055420', 30.00, 0.00),
+(7, 1, 2, 4, 131.96, 'PIX', '66055420', 20.00, 0.00),
+(8, 1, 2, 1, 32.99, 'PIX', '66055420', 30.00, NULL),
+(9, 1, 2, 4, 131.96, 'PIX', '66055420', 20.00, NULL),
+(10, 1, 2, 4, 131.96, 'PIX', '66055420', 10.00, NULL),
+(11, 1, 2, 1, 32.99, 'PIX', '66055420', 20.00, NULL),
+(12, 1, 2, 4, 131.96, 'PIX', '66055420', 10.00, NULL),
+(13, 1, 2, 4, 131.96, 'PIX', '66055420', 10.00, NULL),
+(14, 1, 2, 4, 131.96, 'PIX', '66812420', 15.00, NULL),
+(15, 1, 2, 5, 164.95, 'PIX', '66812420', 15.00, 5.00),
+(16, 1, 2, 5, 164.95, 'PIX', '66055420', 10.00, 10.00),
+(17, 1, 2, 4, 131.96, 'PIX', '66055420', 10.00, 10.00);
 
 -- --------------------------------------------------------
 
@@ -97,16 +114,16 @@ INSERT INTO `products` (`id`, `NAME`, `DESCRIPTION`, `PRICE`, `IMAGE`, `quantity
 --
 
 --
--- Índices de tabela `Clients`
+-- Índices de tabela `clients`
 --
-ALTER TABLE `Clients`
+ALTER TABLE `clients`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- Índices de tabela `ORDERS`
+-- Índices de tabela `orders`
 --
-ALTER TABLE `ORDERS`
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_client` (`id_client`),
   ADD KEY `id_product` (`id_product`);
@@ -123,16 +140,16 @@ ALTER TABLE `products`
 --
 
 --
--- AUTO_INCREMENT de tabela `Clients`
+-- AUTO_INCREMENT de tabela `clients`
 --
-ALTER TABLE `Clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `clients`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT de tabela `ORDERS`
+-- AUTO_INCREMENT de tabela `orders`
 --
-ALTER TABLE `ORDERS`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de tabela `products`
@@ -145,10 +162,10 @@ ALTER TABLE `products`
 --
 
 --
--- Restrições para tabelas `ORDERS`
+-- Restrições para tabelas `orders`
 --
-ALTER TABLE `ORDERS`
-  ADD CONSTRAINT `ORDERS_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `Clients` (`id`),
+ALTER TABLE `orders`
+  ADD CONSTRAINT `ORDERS_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `clients` (`id`),
   ADD CONSTRAINT `ORDERS_ibfk_2` FOREIGN KEY (`id_product`) REFERENCES `products` (`id`);
 COMMIT;
 

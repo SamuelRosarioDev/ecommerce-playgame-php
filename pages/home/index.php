@@ -18,160 +18,21 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Produtos</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-        }
-
-        h1 {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .links {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .links a {
-            text-decoration: none;
-            color: #007BFF;
-            font-size: 18px;
-        }
-
-        .links a:hover {
-            text-decoration: underline;
-        }
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
-            padding: 0 10px;
-        }
-
-        .product {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .product:hover {
-            transform: translateY(-10px);
-        }
-
-        .product img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
-
-        .product h3 {
-            font-size: 1.2em;
-            margin-top: 15px;
-            color: #333;
-        }
-
-        .product p {
-            font-size: 0.9em;
-            color: #666;
-            margin: 10px 0;
-        }
-
-        .product .price {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #28a745;
-        }
-
-        .btn-buy {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-buy:hover {
-            background-color: #0056b3;
-        }
-
-        @media (max-width: 768px) {
-            .products {
-                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            }
-
-            .product {
-                padding: 15px;
-            }
-
-            .product h3 {
-                font-size: 1em;
-            }
-
-            .product .price {
-                font-size: 1em;
-            }
-
-            .btn-buy {
-                font-size: 0.9em;
-                padding: 8px 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5em;
-            }
-
-            .links a {
-                font-size: 16px;
-            }
-
-            .products {
-                grid-template-columns: 1fr;
-            }
-
-            .product {
-                padding: 10px;
-            }
-
-            .product h3 {
-                font-size: 1em;
-            }
-
-            .product .price {
-                font-size: 1.1em;
-            }
-
-            .btn-buy {
-                font-size: 0.9em;
-                padding: 8px 14px;
-            }
-        }
-    </style>
 </head>
 <body>
     
-    <div class="links">
-        <h1>Produtos</h1>
-        <a href="/pages/cart">Cart</a>
-    </div>
+    <nav class="navbar">
+        <div class="logo">
+            <p>Play Game</p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/pages/login">Logar</a></li>
+            <li><a href="/pages/cart">Carrinho</a></li>
+            <li><a href="/pages/contact">Contato</a></li>
+        </ul>
+    </nav>
 
     <div class="products">
         <?php
@@ -192,6 +53,17 @@ $result = $conn->query($sql);
         $conn->close();
         ?>
     </div>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 EcommercePlayGame. Todos os direitos reservados.</p>
+            <ul class="footer-links">
+                <li><a href="/pages/privacy">Política de Privacidade</a></li>
+                <li><a href="/pages/terms">Termos de Serviço</a></li>
+                <p>Feito por Luis e Samuel.</p>
+            </ul>
+        </div>
+    </footer>
 
 </body>
 <script src="./script.js"></script>
