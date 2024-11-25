@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24/11/2024 às 17:04
+-- Tempo de geração: 25/11/2024 às 20:24
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -106,8 +106,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `NAME`, `DESCRIPTION`, `PRICE`, `IMAGE`, `quantity`) VALUES
-(1, 'Once Human', 'Once Human é um jogo multiplayer de sobrevivência em mundo aberto ambientado em um futuro estranho e pós-apocalíptico. Una-se a amigos para lutar contra inimigos monstruosos, desvendar conspirações secretas, competir por recursos e construir seu próprio território.', 0.00, 'https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2139460/header.jpg?t=1732272303', 1),
-(2, 'The Coffin of Andy and Leyley', 'Walk-n-talk adventure with light puzzling. Brother and sister practice cannibalism after witnessing a botched satanic ritual.', 32.99, 'https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2378900/header.jpg?t=1715511135', 1);
+(1, 'Black Myth: Wukong', 'O jogo reimagina a história de Sun Wukong, explorando novos aspectos de sua jornada e apresentando personagens e criaturas míticas familiares aos fãs da obra original. A narrativa é rica e envolvente, mesclando elementos da mitologia chinesa com elementos de fantasia e ação.', 229.99, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2358720/header.jpg?t=1732286900', 1),
+(2, 'The Coffin of Andy and Leyley', 'The Coffin of Andy and Leyley é um jogo de terror psicológico e comédia desenvolvido pela Nemlei e publicado pela Kit9 Studio. O jogo segue a história dos irmãos gêmeos Andrew “Andy” Graves e Ashley “Leyley” Graves, que estão confinados em um apartamento imundo devido a um aviso de quarentena do governo sobre uma infecção transmitida pela água.', 32.99, 'https://shared.cloudflare.steamstatic.com/store_item_assets/steam/apps/2378900/header.jpg?t=1715511135', 1),
+(3, 'Grand Theft Auto V', 'A história de GTA V gira em torno de três protagonistas: Michael, Trevor e Franklin, cada um com suas próprias personalidades e motivações. O jogo alterna entre as perspectivas desses personagens, permitindo que você experimente diferentes estilos de jogo e explore a história sob ângulos variados.\r\n\r\n', 82.41, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/271590/header.jpg?t=1726606628', 1),
+(4, 'ELDEN RING', 'Ambientado em um mundo aberto e vasto chamado Terras Intermédias, Elden Ring conta a história de um mundo quebrado após a fragmentação do Anel Elden. O jogador assume o papel de um Tarnished, um exilado que retorna para as Terras Intermédias com o objetivo de se tornar o Elden Lord, reunindo os fragmentos do Anel Elden e restaurando a ordem ao mundo.', 229.90, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1245620/header.jpg?t=1726158298', 1),
+(5, 'Buckshot Roulette', 'Buckshot Roulette é um jogo que te transporta para o selvagem oeste, onde a adrenalina e o perigo caminham lado a lado. A premissa do jogo é simples, mas viciante: você precisa girar um revólver carregado com uma única bala e puxar o gatilho, tudo em um ambiente caótico e cheio de desafios.', 9.99, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2835570/header_alt_assets_0_brazilian.jpg?t=1731742454', 1),
+(6, 'Fobia - St. Dinfna Hotel', 'Fobia - St. Dinfna Hotel é um jogo de terror psicológico em primeira pessoa que te leva para uma jornada arrepiante em um hotel abandonado no Brasil. A trama gira em torno de Roberto Leite Lopes, um jornalista amador que viaja até Santa Catarina para investigar rumores sobre desaparecimentos misteriosos e atividades paranormais no Hotel St. Dinfna.', 57.99, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1298140/header.jpg?t=1725487910', 1),
+(7, 'Call of Duty®: Black Ops 6\r\n', 'Call of Duty®: Black Ops 6 é a mais recente adição à aclamada franquia Black Ops, trazendo a ação frenética e a narrativa envolvente que os fãs amam. Desenvolvido pela Treyarch e Raven Software, o jogo promete uma experiência épica, com uma campanha solo emocionante, um multijogador competitivo e o retorno do popular modo Zumbis.', 339.00, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2933620/header.jpg?t=1731604753', 1),
+(8, 'Watch Dogs®: Legion\r\n', 'Watch Dogs: Legion é um jogo de mundo aberto que te coloca no controle de uma resistência digital em uma Londres pós-Brexit, onde a vigilância é extrema e a liberdade individual está em risco. Uma das características mais marcantes do jogo é a possibilidade de recrutar praticamente qualquer pessoa que você encontrar nas ruas para se juntar à sua causa.\r\n\r\n', 249.99, 'https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2239550/header.jpg?t=1716280027', 1);
 
 --
 -- Índices para tabelas despejadas
@@ -155,7 +161,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT de tabela `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restrições para tabelas despejadas

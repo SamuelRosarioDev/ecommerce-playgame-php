@@ -18,7 +18,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?version=1.0">
     <title>Produtos</title>
 </head>
 <body>
@@ -30,7 +30,7 @@ $result = $conn->query($sql);
         <ul class="nav-links">
             <li><a href="/pages/login">Logar</a></li>
             <li><a href="/pages/cart">Carrinho</a></li>
-            <li><a href="/pages/contact">Contato</a></li>
+            <li><a href="mailto:davi.alencar.luis@gmail.com">Contato</a></li>
         </ul>
     </nav>
 
@@ -41,9 +41,11 @@ $result = $conn->query($sql);
                 echo '<div class="product">';
                 echo '<h3>' . $row['name'] . '</h3>';
                 echo '<p>' . $row['description'] . '</p>';
+                echo '<div>';
                 echo '<img src="' . $row['image'] . '" alt="' . $row['name'] . '">';
                 echo '<p class="price">R$ ' . number_format($row['price'], 2, ',', '.') . '</p>';
                 echo '<button type="button" class="btn-buy" data-id="' . $row['id'] . '" data-name="' . $row['name'] . '" data-price="' . $row['price'] . '" data-image="' . $row['image'] .'" data-description="' . $row['description'] . '">Comprar</button>';
+                echo '</div>'; 
                 echo '</div>';
             }
         } else {
@@ -58,8 +60,6 @@ $result = $conn->query($sql);
         <div class="footer-content">
             <p>&copy; 2024 EcommercePlayGame. Todos os direitos reservados.</p>
             <ul class="footer-links">
-                <li><a href="/pages/privacy">Política de Privacidade</a></li>
-                <li><a href="/pages/terms">Termos de Serviço</a></li>
                 <p>Feito por Luis e Samuel.</p>
             </ul>
         </div>

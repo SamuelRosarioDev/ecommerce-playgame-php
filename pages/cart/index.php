@@ -13,50 +13,44 @@ $cart = isset($_GET['cart']) ? json_decode($_GET['cart'], true) : [];
 $total_geral = 0;
 $error_message = "";
 
-// Função para calcular o frete com base no valor total do carrinho
 function calcularFrete($cep, $cart) {
     $total_carrinho = 0;
 
-    // Calculando o valor total do carrinho
     foreach ($cart as $product) {
         $total_carrinho += $product['price'] * $product['quantity'];
     }
 
-    // Definindo o valor do frete com base no valor total do carrinho
     if ($total_carrinho >= 100) {
-        $frete = 20.00; // Frete mais barato para pedidos acima de R$100
+        $frete = 20.00;
     } else {
-        $frete = 30.00; // Frete mais caro para pedidos abaixo de R$100
+        $frete = 30.00;
     }
 
-    // Verificando o CEP para aplicar um desconto ou frete diferente
     if (substr($cep, 0, 3) === "660") {
         $desconto_frete = 10.00;
-        $frete -= $desconto_frete; // Aplica o desconto ao frete
+        $frete -= $desconto_frete;
     } elseif (substr($cep, 0, 3) === "668") {
         $desconto_frete = 5.00;
         $frete -= $desconto_frete;
     } else {
-        $desconto_frete = 0; // Sem desconto
+        $desconto_frete = 0;
     }
 
-    return [$frete, $desconto_frete]; // Retorna o valor do frete e o desconto aplicado
+    return [$frete, $desconto_frete];
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id_client = 1; // ID do cliente fixo para exemplo
+    $id_client = 1;
     $payment_method = $_POST['payment'] ?? null;
-    $cep = $_POST['cep'] ?? null; // Recebe o CEP do cliente via formulário
+    $cep = $_POST['cep'] ?? null;
 
-    // Valida se o CEP foi fornecido
     if (!$cep) {
         $error_message = "Por favor, insira seu CEP para continuar.";
     } else {
-        // Remove caracteres não numéricos do CEP
+
         $cep = preg_replace('/[^0-9]/', '', $cep);
         $viacep_url = "https://viacep.com.br/ws/$cep/json/";
 
-        // Consulta à API ViaCEP
         $viacep_response = file_get_contents($viacep_url);
         $viacep_data = json_decode($viacep_response, true);
 
@@ -65,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } elseif (!$payment_method) {
             $error_message = "Por favor, selecione uma opção de pagamento.";
         } elseif (!empty($cart)) {
-            // Calcula o valor do frete e o desconto
+
             list($frete, $desconto_frete) = calcularFrete($cep, $cart);
             
             foreach ($cart as $product) {
@@ -73,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $quantity = $product['quantity'];
                 $total = $product['price'] * $quantity;
 
-                // Agora inclui o valor do desconto diretamente na tabela ORDERS
                 $stmt = $conn->prepare("INSERT INTO ORDERS (id_client, id_product, quantity, total, payment_method, cep, frete, desconto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
                 $stmt->bind_param("iiidssss", $id_client, $id_product, $quantity, $total, $payment_method, $cep, $frete, $desconto_frete);
                 $stmt->execute();
@@ -91,11 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!-- Código HTML permanece o mesmo -->
 
 
 <?php
-// O restante do seu código PHP continua o mesmo
 ?>
 
 <!DOCTYPE html>
@@ -136,7 +127,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endforeach; ?>
             <h3>Total Geral: R$ <?= number_format($total_geral, 2, ',', '.') ?></h3>
             <?php
-                // Cálculo do frete
+
                 if (isset($cep) && $cep && !$error_message) {
                     list($frete, $desconto_frete) = calcularFrete($cep, $cart);
                     echo "<p>Frete: R$ " . number_format($frete, 2, ',', '.') . "</p>";
@@ -169,14 +160,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <script>
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const user = JSON.parse(localStorage.getItem('client')) || {};  // Supondo que o usuário esteja armazenado no localStorage
+        const user = JSON.parse(localStorage.getItem('client')) || {};
         
         const query = encodeURIComponent(JSON.stringify(cart));
         if (!window.location.href.includes('?cart=')) {
             window.location.href = `${window.location.pathname}?cart=${query}`;
         }
 
-        // Preenche o campo de CEP com o valor do usuário, se disponível
         if (user && user.cep) {
             document.getElementById('cep').value = user.cep;
         }

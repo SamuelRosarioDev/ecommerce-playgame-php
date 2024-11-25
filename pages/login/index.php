@@ -1,5 +1,4 @@
 <?php
-
 $host = 'localhost';
 $user = 'root';
 $password_db = ''; 
@@ -43,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login de Usuário</title>
-    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="styles.css?version=1.0">
 </head>
 <body>
     <div class="container">
